@@ -1,7 +1,7 @@
-<script setup>
-
-</script>
+<script setup></script>
 
 <template>
-    <h1>Hello</h1>
+    <header>
+        <p>This is a simple starter kit for Laravel 11, Inertia JS, and Vue JS, without authentication. Tailwind and ZiggyVue are installed.</p>
+    </header>
 </template>
