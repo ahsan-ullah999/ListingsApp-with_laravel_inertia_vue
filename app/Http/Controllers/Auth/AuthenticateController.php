@@ -22,7 +22,7 @@ class AuthenticateController extends Controller
         ]);
         if (Auth::attempt($validation, $request->boolean('remember'))) {
             $request->session()->regenerate();
-            return redirect()->route('home');
+            return redirect()->intended('dashboard');
         }
         return back()->withErrors([
             'email'=>'The provided credential do not match out records.'
