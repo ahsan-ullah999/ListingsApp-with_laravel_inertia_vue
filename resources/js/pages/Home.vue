@@ -2,7 +2,7 @@
 import Card from "../Components/Card.vue";
 import PaginationLinks from "../Components/PaginationLinks.vue";
 import InputField from "../Components/InputField.vue";
-import { router, useForm } from "@inertiajs/vue3";
+import { Link, router, useForm } from "@inertiajs/vue3";
 
 
 
@@ -13,6 +13,9 @@ const props = defineProps({
     listings: Object,
     searchTerm: String,
 });
+
+const username = params.user_id ? props.listings.data.find(i => i.
+user_id === Number(params.user_id)).user.name : null;
 
 
 const form = useForm({
@@ -35,7 +38,35 @@ const search = () => {
    
     <Head title="- Latest Listings" />
     <div class="flex items-center justify-between mb-4">
-        <div class="font-bold">filters</div>
+
+
+        <div class="flex items-center gap-2">
+        <Link
+        class="px-2 py-1 rounded-md bg-indigo-500 text-white flex items-center gap-2"
+         v-if="params.tag" 
+         :href="route('home', {...params, tag: null, page: null})">
+         {{ params.tag }}
+         <i class="fa-solid fa-xmark"></i>
+        </Link>
+
+        <Link
+        class="px-2 py-1 rounded-md bg-indigo-500 text-white flex items-center gap-2"
+         v-if="params.search" 
+         :href="route('home', {...params, search: null, page: null})">
+         {{ params.search }}
+         <i class="fa-solid fa-xmark"></i>
+        </Link>
+
+        <Link
+        class="px-2 py-1 rounded-md bg-indigo-500 text-white flex items-center gap-2"
+         v-if="params.user_id" 
+         :href="route('home', {...params, user_id: null, page: null})">
+         {{ username }}
+         <i class="fa-solid fa-xmark"></i>
+        </Link>
+        </div>
+
+
         <div class="w-1/4">
             <form @submit.prevent="search">
                 <InputField
